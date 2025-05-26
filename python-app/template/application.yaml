@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ${{values.app_name}}
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/rodmhgl/${{values.app_name}}.git
+    path: charts/${{values.app_name}}
+    targetRevision: main
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ${{values.app_name}}-${{values.app_env}}
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
