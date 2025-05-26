@@ -100,4 +100,5 @@ jobs:
       - name: Argo CD App Sync
         shell: bash
         run: |
-          argocd app sync ${{values.app_name}}
+          app=${{values.app_name}}-${{values.app_env}}
+          argocd app sync $app
