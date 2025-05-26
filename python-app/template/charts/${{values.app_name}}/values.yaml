@@ -21,14 +21,14 @@ ingress:
   enabled: true
   className: "nginx"
   hosts:
-    - host: ${{values.app_name}}-${{values.app_env}}.azurelaboratory.com
+    - host: ${{values.app_name}}-dev.azurelaboratory.com
       paths:
         - path: /
           pathType: Prefix
   tls:
     - secretName: ${{values.app_name}}-tls
       hosts:
-        - ${{values.app_name}}-${{values.app_env}}.azurelaboratory.com
+        - ${{values.app_name}}-dev.azurelaboratory.com
 livenessProbe:
   httpGet:
     path: /api/v1/healthz
