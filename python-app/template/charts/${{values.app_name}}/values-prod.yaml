@@ -4,3 +4,14 @@ resources:
   requests:
     cpu: 60m
     memory: 60M
+
+ingress:
+  hosts:
+    - host: ${{values.app_name}}-${{values.app_env}}.azurelaboratory.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: ${{values.app_name}}-tls
+      hosts:
+        - ${{values.app_name}}-${{values.app_env}}.azurelaboratory.com
