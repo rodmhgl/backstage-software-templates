@@ -102,3 +102,4 @@ jobs:
         run: |
           app=${{values.app_name}}-${{values.app_env}}
           argocd app sync $app
+          argocd app wait $app --timeout 180
