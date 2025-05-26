@@ -12,9 +12,9 @@ def hello_world():
             "time": datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y"),
             "hostname": socket.gethostname(),
             "message": "You are doing well, human!!",
-            "deployed_on": 'kubernetes',
-            'env': '${{ values.app_env }}',
-            'app_name': '${{ values.app_name }}',
+            "deployed_on": "kubernetes",
+            "env": "${{ values.app_env }}",
+            "app_name": "${{ values.app_name }}",
         }
     )
 
