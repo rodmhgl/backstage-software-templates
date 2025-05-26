@@ -89,13 +89,13 @@ jobs:
         shell: bash
         run: |
           repo="https://github.com/azurelaboratory/${{values.app_name}}.git"
-          argocd repo list | grep -q $repo || argocd app create ${{values.app_name}}-${{values.app_env}} -f application.yaml
+          argocd repo list | grep -q $repo || argocd repo create $repo
 
       - name: Ensure Argo CD App Exists
         shell: bash
         run: |
           app=${{values.app_name}}-${{values.app_env}}
-          argocd app list | grep -q argocd/$app || argocd app create $app -f application.yaml
+          argocd app list | grep -q argocd/$app || argocd app create $app -f ${{values.app_name}}-${{values.app_env}}-application.yaml
 
       - name: Argo CD App Sync
         shell: bash
