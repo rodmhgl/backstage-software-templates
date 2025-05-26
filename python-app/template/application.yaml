@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/rodmhgl/${{values.app_name}}.git
+    repoURL: https://github.com/azurelaboratory/${{values.app_name}}.git
     path: charts/${{values.app_name}}
     targetRevision: main
   destination:
