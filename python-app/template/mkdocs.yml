@@ -1,5 +1,5 @@
 site_name: '${{values.app_name}}'
-site_description: 'Main documentation for the python-app'
+site_description: 'Main documentation for the ${{values.app_name}}'
 repo_url: https://github.com/rodmhgl/${{values.app_name}}
 edit_uri: edit/main/docs
 
