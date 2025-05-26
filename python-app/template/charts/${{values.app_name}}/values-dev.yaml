@@ -12,6 +12,6 @@ ingress:
         - path: /
           pathType: Prefix
   tls:
-    - secretName: ${{values.app_name}}-tls
+    - secretName: ${{values.app_name}}-dev-tls
       hosts:
         - ${{values.app_name}}-dev.azurelaboratory.com
