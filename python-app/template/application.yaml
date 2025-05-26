@@ -9,9 +9,15 @@ spec:
     repoURL: https://github.com/azurelaboratory/${{values.app_name}}.git
     path: charts/${{values.app_name}}
     targetRevision: main
+    helm:
+    valueFiles:
+      - values-${{values.app_env}}.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: ${{values.app_name}}-${{values.app_env}}
   syncPolicy:
+    automated:
+      - prune: true
+      - selfHeal: true
     syncOptions:
       - CreateNamespace=true
