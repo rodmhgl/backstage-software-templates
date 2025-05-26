@@ -94,7 +94,7 @@ jobs:
       - name: Ensure Argo CD App Exists
         shell: bash
         run: |
-          app=${{values.app_name}}
+          app=${{values.app_name}}-${{values.app_env}}
           argocd app list | grep -q argocd/$app || argocd app create $app -f application.yaml
 
       - name: Argo CD App Sync
