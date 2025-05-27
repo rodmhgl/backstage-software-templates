@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
   repository: rodstewart/${{values.app_name}}
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   tag: ${{values.app_name}}-${{values.app_env}}-latest
 imagePullSecrets: []
 nameOverride: ""
