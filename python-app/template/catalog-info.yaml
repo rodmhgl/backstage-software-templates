@@ -4,8 +4,9 @@ metadata:
   name: ${{values.app_name}}
   description: ${{values.app_name}} is a Python app that displays pod details and status
   annotations:
-    github.com/project-slug: rodmhgl/${{values.app_name}}
+    github.com/project-slug: azurelaboratory/${{values.app_name}}
     backstage.io/techdocs-ref: dir:.
+    argocd/app-name: ${{values.app_name}}-${{values.app_env}}
 spec:
   type: service
   owner: development
