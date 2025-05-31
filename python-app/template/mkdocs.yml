@@ -1,11 +1,17 @@
-site_name: '${{values.app_name}}'
-site_description: 'Main documentation for the ${{values.app_name}}'
-repo_url: https://github.com/azurelaboratory/${{values.app_name}}
+site_name: 'test-mobile'
+site_description: 'Comprehensive documentation for the test-mobile service'
+repo_url: https://github.com/azurelaboratory/test-mobile
 edit_uri: edit/main/docs
 
 plugins:
   - techdocs-core
+  # - mermaid2
 
 nav:
-  - Overview:
-      - Getting Started: 'docs/index.md'
+  - Overview: 'index.md'
+  - Architecture: 'architecture.md'
+  - Development Guide: 'development.md'
+  - Operations Runbook: 'runbook.md'
+  - Architectural Decisions:
+    - 'ADR Index': 'adr/index.md'
+    - 'ADR-001 Container Base Image': 'adr/adr-001-container-base-image.md'
