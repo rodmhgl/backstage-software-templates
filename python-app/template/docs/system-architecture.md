@@ -4,7 +4,7 @@
 
 The ${{values.app_name}} is a containerized Python Flask microservice that demonstrates cloud-native patterns including health checks, observability, and GitOps deployment. This service provides pod details and health status information, serving as a reference implementation for deploying Python applications on Kubernetes using modern DevOps practices.
 
-```plantuml format="svg"
+```plantuml classes="uml myDiagram" alt="Diagram placeholder" title="Architecture Overview"
 @startuml Architecture Overview
 !includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
 
@@ -58,55 +58,66 @@ This service serves as a foundational template for Python microservices within t
 
 ### Components
 
-**Flask Application (${{values.app_name}})**
+#### Flask Application (${{values.app_name}})
+
 - Runtime: Python 3.11 on Alpine Linux container
 - Framework: Flask 3.0.3 web framework
 - Endpoints: Health checks (`/api/v1/healthz`) and pod details (`/api/v1/details`)
 - Resource Requirements: 50m CPU, 50M memory (configurable per environment)
 
-**Helm Chart**
+#### Helm Chart
+
 - Kubernetes deployment manifests with environment-specific value files
 - Supports dev and prod configurations with different resource allocations
 - Includes deployment, service, ingress, and optional autoscaling configurations
 
-**NGINX Ingress Controller**
+#### NGINX Ingress Controller
+
 - Handles external traffic routing and TLS termination
 - Configured with cert-manager integration for automatic certificate management
 - Routes traffic to the Flask application based on hostname rules
 
-**Argo CD Application**
+#### Argo CD Application
+
 - GitOps deployment controller monitoring the GitHub repository
 - Automatically applies changes from the Helm chart to the Kubernetes cluster
 - Provides deployment visibility and rollback capabilities
 
-**GitHub Actions CI/CD Pipeline**
+#### GitHub Actions CI/CD Pipeline
+
 - Triggered on code changes to the `src/` directory
 - Builds and pushes Docker images to Docker Hub registry
 - Updates Helm chart values with new image tags for GitOps deployment
 
 ### Edge Description
 
-**User → NGINX Ingress**
+#### User → NGINX Ingress
+
 - **Overview:** HTTPS requests from external users to access service endpoints
 - **Privacy:** No PII transmitted; service provides infrastructure metadata only
 
-**NGINX Ingress → Flask Application**
+#### NGINX Ingress → Flask Application
+
 - **Overview:** Internal cluster routing of HTTP requests to application pods
 - **Privacy:** No PII; forwards infrastructure queries and health checks
 
-**Argo CD → GitHub Repository**
+#### Argo CD → GitHub Repository
+
 - **Overview:** Polls repository for configuration changes to trigger deployments
 - **Privacy:** No PII; accesses public deployment configurations
 
-**GitHub Actions → Docker Hub**
+#### GitHub Actions → Docker Hub
+
 - **Overview:** Pushes built container images to registry for deployment
 - **Privacy:** No PII; contains application code and dependencies only
 
-**Flask Application → Kubernetes API**
+#### Flask Application → Kubernetes API
+
 - **Overview:** Queries cluster API for pod hostname and metadata information
 - **Privacy:** No PII; accesses pod infrastructure details via service account
 
-**cert-manager → Let's Encrypt**
+#### cert-manager → Let's Encrypt
+
 - **Overview:** Automated certificate provisioning and renewal for TLS
 - **Privacy:** No PII; domain validation only
 
@@ -135,6 +146,7 @@ The service is designed for horizontal scaling via Kubernetes Horizontal Pod Aut
 **Projected Growth:** For 1-2 year timeframe, the template pattern should support 1000+ concurrent users per service instance with proper resource allocation and autoscaling configuration.
 
 **Scaling Considerations:**
+
 - Stateless design enables unlimited horizontal scaling
 - Resource requests may need adjustment based on application-specific requirements
 - Consider implementing custom metrics for more sophisticated autoscaling
@@ -153,11 +165,11 @@ The service is designed for horizontal scaling via Kubernetes Horizontal Pod Aut
 
 ## Resources
 
-- **Live Service:** https://${{values.app_name}}-${{values.app_env}}.azurelaboratory.com
-- **Health Endpoint:** https://${{values.app_name}}-${{values.app_env}}.azurelaboratory.com/api/v1/healthz
-- **ArgoCD Dashboard:** https://argocd.azurelaboratory.com/applications/${{values.app_name}}-${{values.app_env}}
-- **Source Repository:** https://github.com/azurelaboratory/${{values.app_name}}
-- **Container Registry:** https://hub.docker.com/r/rodstewart/${{values.app_name}}
+- **Live Service:** [https://${{values.app_name}}-${{values.app_env}}.azurelaboratory.com](https://${{values.app_name}}-${{values.app_env}}.azurelaboratory.com)
+- **Health Endpoint:** [https://${{values.app_name}}-${{values.app_env}}.azurelaboratory.com/api/v1/healthz](https://${{values.app_name}}-${{values.app_env}}.azurelaboratory.com/api/v1/healthz)
+- **ArgoCD Dashboard:** [https://argocd.azurelaboratory.com/applications/${{values.app_name}}-${{values.app_env}}](https://argocd.azurelaboratory.com/applications/${{values.app_name}}-${{values.app_env}})
+- **Source Repository:** [https://github.com/azurelaboratory/${{values.app_name}}](https://github.com/azurelaboratory/${{values.app_name}})
+- **Container Registry:** [https://hub.docker.com/r/rodstewart/${{values.app_name}}](https://hub.docker.com/r/rodstewart/${{values.app_name}})
 - **Helm Chart Documentation:** `/charts/${{values.app_name}}/README.md`
 - **Operational Runbook:** `/docs/runbook.md`
 - **Development Guide:** `/docs/development.md`
