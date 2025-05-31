@@ -1,6 +1,6 @@
-site_name: 'test-mobile'
-site_description: 'Comprehensive documentation for the test-mobile service'
-repo_url: https://github.com/azurelaboratory/test-mobile
+site_name: '${{values.app_name}}'
+site_description: 'Comprehensive documentation for the ${{values.app_name}} service'
+repo_url: https://github.com/azurelaboratory/${{values.app_name}}
 edit_uri: edit/main/docs
 
 plugins:
@@ -9,6 +9,7 @@ plugins:
 
 nav:
   - Overview: 'index.md'
+  - System Architecture: 'system-architecture.md'
   - Architecture: 'architecture.md'
   - Development Guide: 'development.md'
   - Operations Runbook: 'runbook.md'
