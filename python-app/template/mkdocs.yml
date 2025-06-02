@@ -5,7 +5,7 @@ edit_uri: edit/main/docs
 
 plugins:
   - techdocs-core
-  # - mermaid2
+  - kroki
 
 nav:
   - Overview: 'index.md'
