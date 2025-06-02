@@ -2,7 +2,7 @@
 
 ## System Context
 
-```kroki-mermaid
+```mermaid
 graph TB
     U[Users] --> LB[Load Balancer/Ingress]
     LB --> PS[Python Service]

@@ -7,6 +7,9 @@ plugins:
   - techdocs-core
   - kroki
 
+markdown_extensions:
+  - markdown_inline_mermaid
+
 nav:
   - Overview: 'index.md'
   - System Architecture: 'system-architecture.md'
