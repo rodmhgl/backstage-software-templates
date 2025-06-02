@@ -1,6 +1,6 @@
 # Architectural Decision Records (ADRs)
 
-This section documents important architectural decisions made during the development of python-app.
+This section documents important architectural decisions made during the development of ${{values.app_name}}.
 
 ## ADR Index
 

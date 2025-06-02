@@ -27,10 +27,10 @@ curl http://localhost:5000/api/v1/details
 
 ```bash
 # Build image
-docker build -t python-app:local .
+docker build -t ${{values.app_name}}:local .
 
 # Run container
-docker run -p 5000:5000 python-app:local
+docker run -p 5000:5000 ${{values.app_name}}:local
 
 # Test containerized app
 curl http://localhost:5000/api/v1/healthz
@@ -42,17 +42,17 @@ curl http://localhost:5000/api/v1/healthz
 
 ```bash
 # Deploy to dev namespace
-helm install python-app-dev ./charts/python-app \
+helm install ${{values.app_name}}-dev ./charts/${{values.app_name}} \
   --namespace dev \
   --set image.tag=dev-$(git rev-parse --short HEAD) \
-  --set ingress.hosts[0].host=python-app-dev.azurelaboratory.com
+  --set ingress.hosts[0].host=${{values.app_name}}-dev.azurelaboratory.com
 ```
 
 ### Production Deployment
 
 Production deployments are handled via GitOps:
 
-1. Update `charts/python-app/values.yaml` with new image tag
+1. Update `charts/${{values.app_name}}/values.yaml` with new image tag
 2. Commit changes to main branch
 3. Argo CD automatically deploys changes
 
@@ -72,7 +72,7 @@ python -m pytest --cov=src tests/
 
 ```bash
 # Test against running service
-curl -f https://python-app.azurelaboratory.com/api/v1/healthz || exit 1
+curl -f https://${{values.app_name}}.azurelaboratory.com/api/v1/healthz || exit 1
 ```
 
 ## Code Quality

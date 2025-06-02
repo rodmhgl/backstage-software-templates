@@ -6,16 +6,16 @@
 
 ```bash
 # Basic health check
-curl https://python-app.azurelaboratory.com/api/v1/healthz
+curl https://${{values.app_name}}.azurelaboratory.com/api/v1/healthz
 
 # Detailed service info
-curl https://python-app.azurelaboratory.com/api/v1/details
+curl https://${{values.app_name}}.azurelaboratory.com/api/v1/details
 
 # Check pod status
-kubectl get pods -l app.kubernetes.io/name=python-app
+kubectl get pods -l app.kubernetes.io/name=${{values.app_name}}
 
 # View recent logs
-kubectl logs -l app.kubernetes.io/name=python-app --tail=50
+kubectl logs -l app.kubernetes.io/name=${{values.app_name}} --tail=50
 ```
 
 ## Common Issues & Troubleshooting
@@ -26,9 +26,9 @@ kubectl logs -l app.kubernetes.io/name=python-app --tail=50
 
 **Investigation Steps:**
 
-1. Check pod status: `kubectl get pods -l app.kubernetes.io/name=python-app`
+1. Check pod status: `kubectl get pods -l app.kubernetes.io/name=${{values.app_name}}`
 2. Examine pod logs: `kubectl logs <pod-name>`
-3. Verify service endpoints: `kubectl get endpoints python-app`
+3. Verify service endpoints: `kubectl get endpoints ${{values.app_name}}`
 
 **Common Causes:**
 
@@ -42,9 +42,9 @@ kubectl logs -l app.kubernetes.io/name=python-app --tail=50
 
 **Investigation Steps:**
 
-1. Check certificate status: `kubectl get certificate python-app-tls`
+1. Check certificate status: `kubectl get certificate ${{values.app_name}}-tls`
 2. Examine cert-manager logs: `kubectl logs -n cert-manager deployment/cert-manager`
-3. Verify DNS resolution: `nslookup python-app.azurelaboratory.com`
+3. Verify DNS resolution: `nslookup ${{values.app_name}}.azurelaboratory.com`
 
 ### Issue: Deployment Stuck
 
@@ -53,7 +53,7 @@ kubectl logs -l app.kubernetes.io/name=python-app --tail=50
 **Investigation Steps:**
 
 1. Check Argo CD application: Visit [Argo CD Dashboard](https://argocd.azurelaboratory.com)
-2. Review deployment events: `kubectl describe deployment python-app`
+2. Review deployment events: `kubectl describe deployment ${{values.app_name}}`
 3. Check image pull status: `kubectl describe pod <pod-name>`
 
 ## Scaling Operations
@@ -62,10 +62,10 @@ kubectl logs -l app.kubernetes.io/name=python-app --tail=50
 
 ```bash
 # Scale to 3 replicas
-kubectl scale deployment python-app --replicas=3
+kubectl scale deployment ${{values.app_name}} --replicas=3
 
 # Or via Helm
-helm upgrade python-app ./charts/python-app --set replicaCount=3
+helm upgrade ${{values.app_name}} ./charts/${{values.app_name}} --set replicaCount=3
 ```
 
 ### Monitoring Scaling Metrics
@@ -83,15 +83,15 @@ helm upgrade python-app ./charts/python-app --set replicaCount=3
 # Use the Argo CD UI to rollback to previous version
 
 # Via kubectl (emergency only)
-kubectl rollout undo deployment/python-app
+kubectl rollout undo deployment/${{values.app_name}}
 
 # Check rollout status
-kubectl rollout status deployment/python-app
+kubectl rollout status deployment/${{values.app_name}}
 ```
 
 ### Service
 
 ```bash
 # Force pod restart
-kubectl rollout restart deployment/python-app
+kubectl rollout restart deployment/${{values.app_name}}
 ```
